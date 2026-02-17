@@ -1,18 +1,32 @@
+import pytest
 from src.task2 import get_data_types
 
-def test_task2_types():
-    my_int, my_float, my_string, my_bool = get_data_types()
 
-    assert isinstance(my_int, int)
-    assert isinstance(my_float, float)
-    assert isinstance(my_string, str)
-    assert isinstance(my_bool, bool)
+@pytest.mark.parametrize(
+    "index, expected_type",
+    [
+        (0, int),
+        (1, float),
+        (2, str),
+        (3, bool),
+    ],
+)
+def test_task2_types(index, expected_type):
+    values = get_data_types()
+    assert isinstance(values[index], expected_type)
 
-def test_task2_values():
-    my_int, my_float, my_string, my_bool = get_data_types()
 
-    assert my_int == 10
-    assert my_float == 3.14
-    assert my_string == "Python"
-    assert my_bool is True
+@pytest.mark.parametrize(
+    "index, expected_value",
+    [
+        (0, 10),
+        (1, 3.14),
+        (2, "Python"),
+        (3, True),
+    ],
+)
+def test_task2_values(index, expected_value):
+    values = get_data_types()
+    assert values[index] == expected_value
+
     
