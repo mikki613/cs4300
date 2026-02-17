@@ -88,11 +88,47 @@ homework1/
 ## Requirements
 This project requires Python 3 and uses external Python packages listed in `requirements.txt`.
 
-To install required packages, run:
+ Virtual Environment Setup
+
+From your home directory:
 
 ```bash
-pip install -r requirements.txt
+cd ~
+python3 -m venv hw1_env --system-site-packages
+source hw1_env/bin/activate 
 
-To run all tests, navigate to the homework1 directory and run:
+```
 
-pytest
+
+## Install dependencies:
+```bash
+cd cs4300/homework1
+python3 -m pip install -r requirements.txt
+
+```
+
+
+
+## Activate Environment (Every Time You Restart DevEdu): 
+```bash
+source ~/hw1_env/bin/activate
+
+```
+
+
+## From inside the homework1 directory:
+```bash
+cd cs4300/homework1
+python3 -m pytest -q
+``` 
+
+
+## Run Individual Task Files: 
+```bash
+cd cs4300/homework1
+python3 src/task1.py
+python3 src/task6.py
+python3 src/task7.py
+
+``` 
+

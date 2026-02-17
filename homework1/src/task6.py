@@ -1,10 +1,11 @@
+from pathlib import Path
+
 def count_words(filename):
-    with open(filename, "r") as file:
+    base_path = Path(__file__).resolve().parent.parent
+    file_path = base_path / filename
+
+    with open(file_path, "r") as file:
         text = file.read()
-    
+
     words = text.split()
     return len(words)
-
-
-if __name__ == "__main__":
-    print(count_words("task6_read_me.txt"))
