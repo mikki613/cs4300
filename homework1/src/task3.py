@@ -1,20 +1,22 @@
-def check_number(n):
-    if n > 0:
+def check_number(num):
+    if num > 0:
         return "positive"
-    elif n < 0:
+    elif num < 0:
         return "negative"
     else:
         return "zero"
 
-def is_prime(num):
-    if num < 2:
+
+def is_prime(n):
+    if n < 2:
         return False
 
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-           return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
 
     return True
+
 
 def first_10_primes():
     primes = []
@@ -27,6 +29,14 @@ def first_10_primes():
 
     return primes
 
+
+def print_first_10_primes():
+    primes = first_10_primes()
+
+    for p in primes:
+        print(p)
+
+
 def sum_1_to_100():
     total = 0
     i = 1
@@ -35,10 +45,14 @@ def sum_1_to_100():
         total += i
         i += 1
 
-    return total 
+    return total
 
 
 if __name__ == "__main__":
-    print(check_number(5))
-    print(first_10_primes())
+    print(check_number(10))
+    print(check_number(-5))
+    print(check_number(0))
+
+    print_first_10_primes()
+
     print(sum_1_to_100())
