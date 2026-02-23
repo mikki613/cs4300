@@ -1,0 +1,30 @@
+{% extends 'bookings/base.html' %}
+{% block title %}Book a Seat{% endblock %}
+
+{% block content %}
+  <h2 class="mb-3">Book a Seat for: {{ movie.title }}</h2>
+
+  {% if not user.is_authenticated %}
+    <div class="alert alert-warning">
+      You must <a href="{% url 'login' %}">log in</a> to book a seat.
+    </div>
+  {% else %}
+    <form method="post" class="card p-3 shadow-sm">
+      {% csrf_token %}
+      <label class="form-label">Choose a seat:</label>
+
+      <select name="seat_id" class="form-select mb-3" required>
+        {% for seat in seats %}
+          <option value="{{ seat.id }}" {% if seat.is_booked %}disabled{% endif %}>
+            {{ seat.seat_number }} {% if seat.is_booked %}(Booked){% endif %}
+          </option>
+        {% endfor %}
+      </select>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-success" type="submit">Confirm Booking</button>
+        <a class="btn btn-secondary" href="{% url 'movie_list' %}">Back</a>
+      </div>
+    </form>
+  {% endif %}
+{% endblock %}
