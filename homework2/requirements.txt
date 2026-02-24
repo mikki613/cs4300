@@ -9,7 +9,9 @@ cucumber-expressions==19.0.0
 cucumber-tag-expressions==9.1.0
 Django==6.0.2
 djangorestframework==3.16.1
+gunicorn==25.1.0
 l==0.11.0
+packaging==26.0
 parse==1.21.1
 parse_type==0.6.6
 six==1.17.0
@@ -17,4 +19,5 @@ soupsieve==2.8.3
 sqlparse==0.5.5
 typing_extensions==4.15.0
 vcversioner==2.16.0.0
+whitenoise==6.11.0
 zope.interface==8.2
