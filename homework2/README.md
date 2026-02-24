@@ -285,6 +285,7 @@ AI tools (ChatGPT) were used to assist with:
 - Django project scaffolding
 - Debugging configuration issues
 - Structuring documentation/Grammar correction
+- Render related questions and concerns.
 
 All code was reviewed, tested, and modified to meet assignment requirements.
 
