@@ -101,11 +101,9 @@ https://cs4300-hw2-movie-booking.onrender.com
 
 ### Bookings
 - `GET /api/bookings/` *(Authentication required)*
+- `POST /api/bookings/` *(Authentication required)*
 
 Booking history only returns the logged-in user's bookings.
-
-## POST `/api/bookings/`
-Allows creating a new booking (authentication required).
 
 ---
 
@@ -207,11 +205,11 @@ https://cs4300-hw2-movie-booking.onrender.com/
 ``` 
 You can use this link to:
 
--View the movie listing page
+- View the movie listing page
 
--Book seats (after logging in)
+- Book seats (after logging in)
 
--View booking history
+- View booking history
 
 The application was deployed using Render’s Web Service configuration with Gunicorn and environment variables for SECRET_KEY and DEBUG.
 
@@ -247,10 +245,6 @@ BDD scenario verifies:
 ---
 
 ## Deployment (Render Configuration)
-
-Build Command:
-
-```bash
 
 ### Render Deployment
 
