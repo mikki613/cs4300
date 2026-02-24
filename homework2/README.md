@@ -79,6 +79,16 @@ Base URL (local development):
 http://127.0.0.1:3000
 
 ```
+## Base URL (Render deployment):
+
+``` bash
+
+https://cs4300-hw2-movie-booking.onrender.com
+
+```
+
+
+
 ### Movies
 - `GET /api/movies/`
 - `POST /api/movies/`
@@ -94,17 +104,27 @@ http://127.0.0.1:3000
 
 Booking history only returns the logged-in user's bookings.
 
+## POST `/api/bookings/`
+Allows creating a new booking (authentication required).
+
 ---
 
-##  Web Interface Routes
+### Web Interface Routes
 
-- `/` → Movie list
-- `/movies/<id>/book/` → Seat booking
-- `/history/` → Booking history
-- `/login/`
-- `/logout/`
+- `/` – Displays available movies  
+- `/movies/<int:movie_id>/book/` – Book a seat for a movie (requires login)  
+- `/history/` – Shows the logged-in user’s booking history  
 
-Features:
+### Authentication Routes
+
+User authentication is handled using Django’s built-in system.
+
+- `/accounts/login/` – Login page  
+- `/accounts/logout/` – Logout  
+
+If a user tries to book a seat without being logged in, they are redirected to the login page.
+
+### Features:
 - Disabled seats once booked
 - Success/error alerts
 - Authentication required to book seats
@@ -231,9 +251,20 @@ BDD scenario verifies:
 Build Command:
 
 ```bash
-pip install -r requirements.txt && python manage.py migrate
+
+### Render Deployment
+
+The project is deployed on Render using the following settings:
+
+Build Command:
+pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
+
+Start Command:
+gunicorn movie_theater_booking.wsgi:application
 
 ```
+
+collectstatic is included in the build command because the project uses WhiteNoise for serving static files in production.
 
 Ensure `ALLOWED_HOSTS` includes:
 - DevEdu domain
