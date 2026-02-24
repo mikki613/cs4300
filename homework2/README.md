@@ -176,6 +176,27 @@ http://127.0.0.1:3000
 
 ---
 
+### Live Deployment using Render:
+
+This project has been deployed on Render and is publicly accessible at:
+
+```bash
+
+https://cs4300-hw2-movie-booking.onrender.com/
+
+``` 
+You can use this link to:
+
+-View the movie listing page
+
+-Book seats (after logging in)
+
+-View booking history
+
+The application was deployed using Render’s Web Service configuration with Gunicorn and environment variables for SECRET_KEY and DEBUG.
+
+---
+
 ##  Testing
 
 ### Django Unit & Integration Tests
