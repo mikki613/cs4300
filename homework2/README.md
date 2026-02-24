@@ -240,7 +240,7 @@ Ensure `ALLOWED_HOSTS` includes:
 - localhost
 - 127.0.0.1
 - testserver
-
+- .onrender.com
 ---
 
 ##  Security Considerations
