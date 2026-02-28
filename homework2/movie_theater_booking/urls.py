@@ -1,8 +1,8 @@
 """
 Main URL configuration for the Movie Theater Booking project.
 
-- admin/ is the Django admin
-- everything else is handled by the bookings app
+- /admin/ -> Django admin site
+- Everything else is handled by the bookings app
 """
 
 from django.contrib import admin
