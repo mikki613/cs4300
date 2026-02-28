@@ -1,30 +1,39 @@
-{% extends 'bookings/base.html' %}
-{% block title %}Book a Seat{% endblock %}
+{% extends "bookings/base.html" %}
+
+{% block title %}Book Seat{% endblock %}
 
 {% block content %}
-  <h2 class="mb-3">Book a Seat for: {{ movie.title }}</h2>
+<!-- TEMPLATE VERSION: NEW AVAILABLE SEATS TEMPLATE -->
 
-  {% if not user.is_authenticated %}
-    <div class="alert alert-warning">
-      You must <a href="{% url 'login' %}">log in</a> to book a seat.
+<div class="container mt-4">
+  <h2 class="mb-4">Book a Seat for: {{ movie.title }}</h2>
+
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+
+  {% if seats %}
+    <div class="card p-4">
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="seat_id" class="form-label">Choose a seat:</label>
+          <select class="form-select" name="seat_id" id="seat_id" required>
+            <option value="" selected>Select a seat</option>
+            {% for seat in seats %}
+              <option value="{{ seat.id }}">{{ seat.seat_number }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+        <a href="{% url 'movie_list' %}" class="btn btn-secondary ms-2">Back</a>
+      </form>
     </div>
   {% else %}
-    <form method="post" class="card p-3 shadow-sm">
-      {% csrf_token %}
-      <label class="form-label">Choose a seat:</label>
-
-      <select name="seat_id" class="form-select mb-3" required>
-        {% for seat in seats %}
-          <option value="{{ seat.id }}" {% if seat.is_booked %}disabled{% endif %}>
-            {{ seat.seat_number }} {% if seat.is_booked %}(Booked){% endif %}
-          </option>
-        {% endfor %}
-      </select>
-
-      <div class="d-flex gap-2">
-        <button class="btn btn-success" type="submit">Confirm Booking</button>
-        <a class="btn btn-secondary" href="{% url 'movie_list' %}">Back</a>
-      </div>
-    </form>
+    <div class="alert alert-warning">No available seats left for this movie.</div>
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary">Back</a>
   {% endif %}
+</div>
 {% endblock %}
