@@ -13,22 +13,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 # -------------------------
 
-# Use environment variable in production (Render)
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 
-# Default to False (safe). Set DEBUG=1 locally if needed.
-DEBUG = os.environ.get("DEBUG", "0") == "1"
+# Keep False on Render
+DEBUG = False
 
+#  FIXED: commas + includes your render host
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "testserver",
     ".onrender.com",
+    "cs4300-hw2-movie-booking.onrender.com",
     "app-mhagema3-21.devedu.io",
     "editor-mhagema3-21.devedu.io",
 ]
 
+# CSRF: include your render domain so POST forms work on Render
 CSRF_TRUSTED_ORIGINS = [
+    "https://cs4300-hw2-movie-booking.onrender.com",
+    "https://*.onrender.com",
     "https://app-mhagema3-21.devedu.io",
     "https://editor-mhagema3-21.devedu.io",
 ]
@@ -93,7 +97,7 @@ WSGI_APPLICATION = "movie_theater_booking.wsgi.application"
 
 
 # -------------------------
-# Database (SQLite for class)
+# Database (SQLite)
 # -------------------------
 
 DATABASES = {
@@ -132,7 +136,6 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
@@ -142,3 +145,5 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
