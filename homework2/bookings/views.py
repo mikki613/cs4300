@@ -146,3 +146,17 @@ def booking_history_page(request):
     """
     bookings = Booking.objects.filter(user=request.user).order_by("-booking_date")
     return render(request, "bookings/booking_history.html", {"bookings": bookings})
+
+
+from django.contrib.auth.forms import UserCreationForm
+
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/signup.html", {"form": form})
