@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit
 
-echo "==== RUNNING build.sh ===="
-python --version
-pwd
-ls -la
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 
-python manage.py migrate
+# static files for whitenoise
 python manage.py collectstatic --noinput
-
-echo "==== TRYING TO CREATE SUPERUSER ===="
-python bookings/create_superuser.py
-echo "==== FINISHED SUPERUSER STEP ====" 
