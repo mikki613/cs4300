@@ -20,5 +20,35 @@ class BookingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ["id", "movie", "movie_title", "seat", "seat_number", "user", "booking_date"]
+        fields = [
+            "id",
+            "movie",
+            "movie_title",
+            "seat",
+            "seat_number",
+            "user",
+            "booking_date",
+        ]
         read_only_fields = ["user", "booking_date"]
+
+    def validate_seat(self, seat):
+        # Block booking if seat is already marked booked
+        if getattr(seat, "is_booked", False):
+            raise serializers.ValidationError("This seat is already booked.")
+
+        # Also block if there is already a booking row for this seat
+        if Booking.objects.filter(seat=seat).exists():
+            raise serializers.ValidationError("This seat is already booked.")
+
+        return seat
+
+    #  Automatically set seat as booked when creating booking
+    def create(self, validated_data):
+        booking = Booking.objects.create(**validated_data)
+
+        # mark seat as booked
+        seat = booking.seat
+        seat.is_booked = True
+        seat.save()
+
+        return booking 
