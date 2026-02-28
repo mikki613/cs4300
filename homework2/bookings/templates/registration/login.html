@@ -1,19 +1,28 @@
 {% extends "bookings/base.html" %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container mt-4" style="max-width: 520px;">
+<div class="container mt-4" style="max-width: 500px;">
   <h2 class="mb-3">Login</h2>
 
   {% if form.errors %}
-    <div class="alert alert-danger">
-      Invalid username or password. Please try again.
-    </div>
+    <div class="alert alert-danger">Invalid username or password.</div>
   {% endif %}
 
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-success" type="submit">Login</button>
+
+    <div class="mb-3">
+      <label class="form-label">Username</label>
+      {{ form.username }}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      {{ form.password }}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
   </form>
 </div>
 {% endblock %}
