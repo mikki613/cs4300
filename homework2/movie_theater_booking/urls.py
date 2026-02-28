@@ -17,6 +17,5 @@ urlpatterns = [
     # Bookings app (includes template pages and API endpoints)
     path("", include("bookings.urls")),
 
-    # Authentication (login/logout)
-    path("accounts/", include("django.contrib.auth.urls")),
+    
 ]

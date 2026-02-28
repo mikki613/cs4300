@@ -1,14 +1,26 @@
+"""
+One-time helper script to create a Django superuser on Render (non-interactive).
+
+"""
+
 import os
-import django
+import sys
 
 
 def main():
+    # Make sure the project root is on the Python path
+    # (the folder that contains manage.py and movie_theater_booking/)
+    PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if PROJECT_ROOT not in sys.path:
+        sys.path.insert(0, PROJECT_ROOT)
+
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "movie_theater_booking.settings")
+
+    import django
     django.setup()
 
     from django.contrib.auth import get_user_model
 
-    # Only run when the flag is enabled
     if os.getenv("CREATE_SUPERUSER") != "1":
         print("CREATE_SUPERUSER not set to 1, skipping.")
         return
@@ -29,5 +41,7 @@ def main():
 
     User.objects.create_superuser(username=username, password=password, email=email)
     print(f"Created superuser '{username}' successfully!")
+
+
 if __name__ == "__main__":
     main()
