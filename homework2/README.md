@@ -218,7 +218,7 @@ The application was deployed using Render’s Web Service configuration with Gun
 
 ### Render Configuration:
 
-## Build Command:  
+### Build Command:  
 
 ```bash
 
@@ -226,7 +226,13 @@ pip install -r requirements.txt && python manage.py migrate && python manage.py 
 
 ``` 
 
-## Start Command: 
+The custom `seed` management command creates:
+
+A default superuser (using environment variables)
+
+A sample movie if none exist
+
+### Start Command: 
 
 ```bash
 
