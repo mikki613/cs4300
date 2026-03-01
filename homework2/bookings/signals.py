@@ -7,15 +7,23 @@ DEFAULT_SEAT_COUNT = 30
 
 
 @receiver(post_migrate)
-def create_default_seats(sender, **kwargs):
+def ensure_default_seats(sender, **kwargs):
     """
-    Ensure the database has seats after migrations.
+    Ensure the database has at least DEFAULT_SEAT_COUNT seats after migrations.
+
+    If some seats already exist (e.g., 10), this will create the missing ones
+    instead of doing nothing.
     """
     if getattr(sender, "name", None) != "bookings":
         return
 
-    if Seat.objects.exists():
-        return
+    existing = set(Seat.objects.values_list("seat_number", flat=True))
 
-    seats = [Seat(seat_number=f"A{i}") for i in range(1, DEFAULT_SEAT_COUNT + 1)]
-    Seat.objects.bulk_create(seats)
+    missing = [
+        Seat(seat_number=f"A{i}")
+        for i in range(1, DEFAULT_SEAT_COUNT + 1)
+        if f"A{i}" not in existing
+    ]
+
+    if missing:
+        Seat.objects.bulk_create(missing)
