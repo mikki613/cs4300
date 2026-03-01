@@ -232,13 +232,7 @@ A default superuser (using environment variables)
 
 A sample movie if none exist
 
-### Start Command: 
-
-```bash
-
-gunicorn movie_theater_booking.wsgi:application
-
-```
+---
 
 collectstatic is included in the build command because the project uses WhiteNoise for serving static files in production.
 
@@ -248,6 +242,16 @@ Ensure `ALLOWED_HOSTS` includes:
 - 127.0.0.1
 - testserver
 - .onrender.com
+
+### Start Command: 
+
+```bash
+
+gunicorn movie_theater_booking.wsgi:application
+
+```
+
+
 
 ---
 
