@@ -58,7 +58,6 @@ cs4300/
 
 ###  Seat
 - seat_number
-- is_booked (boolean)
 
 ###  Booking
 - movie (ForeignKey)
@@ -76,7 +75,7 @@ Base URL (local development):
 
 ```bash
 
-http://127.0.0.1:3000
+https://app-mhagema3-21.devedu.io/ 
 
 ```
 ## Base URL (Render deployment):
@@ -97,7 +96,7 @@ https://cs4300-hw2-movie-booking.onrender.com
 
 ### Seats
 - `GET /api/seats/`
-- `POST /api/seats/<id>/book/` *(Authentication required)*
+
 
 ### Bookings
 - `GET /api/bookings/` *(Authentication required)*
@@ -119,6 +118,7 @@ User authentication is handled using Django’s built-in system.
 
 - `/accounts/login/` – Login page  
 - `/accounts/logout/` – Logout  
+- `/admin/` - Admin Panel
 
 If a user tries to book a seat without being logged in, they are redirected to the login page.
 
@@ -188,7 +188,7 @@ python3 manage.py runserver 0.0.0.0:3000
 
 ```bash
 
-http://127.0.0.1:3000
+https://app-mhagema3-21.devedu.io/ 
 
 ``` 
 
@@ -203,6 +203,7 @@ This project has been deployed on Render and is publicly accessible at:
 https://cs4300-hw2-movie-booking.onrender.com/
 
 ``` 
+
 You can use this link to:
 
 - View the movie listing page
@@ -211,7 +212,36 @@ You can use this link to:
 
 - View booking history
 
-The application was deployed using Render’s Web Service configuration with Gunicorn and environment variables for SECRET_KEY and DEBUG.
+The application was deployed using Render’s Web Service configuration with Gunicorn and environment variables for ADMIN_USER and ADMIN_PASS.
+
+---
+
+### Render Configuration:
+
+## Build Command:  
+
+```bash
+
+pip install -r requirements.txt && python manage.py migrate && python manage.py seed && python manage.py collectstatic --noinput
+
+``` 
+
+## Start Command: 
+
+```bash
+
+gunicorn movie_theater_booking.wsgi:application
+
+```
+
+collectstatic is included in the build command because the project uses WhiteNoise for serving static files in production.
+
+Ensure `ALLOWED_HOSTS` includes:
+- DevEdu domain
+- localhost
+- 127.0.0.1
+- testserver
+- .onrender.com
 
 ---
 
@@ -240,33 +270,10 @@ behave
 ```
 
 BDD scenario verifies:
-- Unauthenticated users cannot access booking history endpoint
+- BDD tests verify application behavior such as restricting access for unauthenticated users.
 
 ---
 
-## Deployment (Render Configuration)
-
-### Render Deployment
-
-The project is deployed on Render using the following settings:
-
-Build Command:
-pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
-
-Start Command:
-gunicorn movie_theater_booking.wsgi:application
-
-```
-
-collectstatic is included in the build command because the project uses WhiteNoise for serving static files in production.
-
-Ensure `ALLOWED_HOSTS` includes:
-- DevEdu domain
-- localhost
-- 127.0.0.1
-- testserver
-- .onrender.com
----
 
 ##  Security Considerations
 
@@ -293,11 +300,11 @@ All code was reviewed, tested, and modified to meet assignment requirements.
 
 ##  Assignment Requirements Covered
 
-- Django project created
-- Models implemented
+- Django project created inside homework2 directory
+- Models implemented correctly
 - DRF ViewSets implemented
 - REST API endpoints functional
-- Bootstrap UI implemented
+- Bootstrap-based UI implemented
 - Booking logic enforced
 - Unit & integration tests implemented
 - BDD tests implemented
