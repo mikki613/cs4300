@@ -218,6 +218,7 @@ The application was deployed using Render’s Web Service configuration with Gun
 
 ### Render Configuration:
 
+---
 This project is deployed using Render’s free tier Web Service.
 
 Because the free tier uses ephemeral storage, the SQLite database does not persist permanently. This means:
@@ -262,7 +263,18 @@ Ensure `ALLOWED_HOSTS` includes:
 gunicorn movie_theater_booking.wsgi:application
 
 ```
+--- 
 
+## Application Screenshots
+
+### Movie List Page
+![Movies Page](screenshots/movies.png)
+
+### Seat Selection Page
+![Seats Page](screenshots/seats.png)
+
+### Double Booking Prevention
+![Double Seat Protection](screenshots/double_seats.png)
 
 
 ---
