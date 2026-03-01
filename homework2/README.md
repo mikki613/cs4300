@@ -274,7 +274,7 @@ gunicorn movie_theater_booking.wsgi:application
 ![Seats Page](screenshots/seats.png)
 
 ### Double Booking Prevention
-![Double Seat Protection](screenshots/double_seats.png)
+![Double Seat Protection](screenshots/double seats.png)
 
 
 ---
