@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='movie',
             name='duration',
-            field=models.PositiveIntegerField(default=django.utils.timezone.now, help_text='Duration in minutes'),
+            field=models.PositiveIntegerField(default=120, help_text='Duration in minutes'),
             preserve_default=False,
         ),
         migrations.AlterField(
