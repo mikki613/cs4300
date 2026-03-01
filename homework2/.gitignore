@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+hw2_env/
+env_hw2/
+myenv/
+
+# SQLite database
+db.sqlite3
+*.sqlite3
+
+# Zip files
+*.zip
+
+# Mac
+.DS_Store
