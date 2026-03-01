@@ -218,6 +218,18 @@ The application was deployed using Render’s Web Service configuration with Gun
 
 ### Render Configuration:
 
+This project is deployed using Render’s free tier Web Service.
+
+Because the free tier uses ephemeral storage, the SQLite database does not persist permanently. This means:
+
+- Any data added through the admin panel may be lost if the service restarts.
+
+- Superusers created manually through the admin may not persist after a redeploy.
+
+- Movies and bookings may disappear after inactivity or redeployment.
+
+---
+
 ### Build Command:  
 
 ```bash
